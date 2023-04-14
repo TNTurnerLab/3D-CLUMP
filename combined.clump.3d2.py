@@ -1,11 +1,22 @@
 #! /usr/bin/env python
 '''
-cluster.py
-Uses pamk from clump.py to determine clustering for mutation positions in a given gene
+Code modified by Yilin Chen
+Rachel Kruzan, PhD,
+Johns Hopkins University
+
+and
+
+Jeffrey K. Ng
+Tychele N. Turner, PhD, 
+Washington University in St. Louis 
+
+Initial Commit date: 2/13/23
+
 '''
 
+
+
 from optparse import OptionParser
-#from clump import pamk
 import rpy2.robjects as robjects
 from Bio.PDB.PDBParser import PDBParser
 import math
@@ -13,12 +24,6 @@ import pandas as pd
 import sys, os
 import numpy as np
 import rpy2.robjects.numpy2ri
-
-
-
-
-#import random
-
 r=robjects.r
 r.library('fpc')
 
@@ -42,16 +47,13 @@ class CmdOpts(object):
                           help='''Input the controls that will be used for permutation testing''')
         parser.add_option('-z','--zname',dest='permutations',
                           help='''Input the number of permutations you want to perform on each gene''')
-
         parser.add_option('-s','--sname',dest='structurepath',
                           help='''Input the file directory of the pdb structures you want to use''')
-
         parser.add_option("-m","--mname",dest='nmutcutoff', default=5,
                           help="""Number of mutations needed in a gene to be considered""")
         parser.add_option('-n',action="store_true",dest='normalize',
                           help="""Normalize protein lengths""")
         parser.add_option('-t',action='store_true',dest='titles',help="""Output Column Titles""")
-        
         (opts, args) = parser.parse_args()
 
         if not opts.filename and not opts.affreq and not opts.proteinlengths:
@@ -104,20 +106,11 @@ class Parser():
                     try:
                         self.pbds[protID] = pdbparser.get_structure(protID, self.structdir + protID + '.pdb')[0]['A']
                     except FileNotFoundError:
-                        continue
-            
-
-                ########
-                #structure = pdbparser.get_structure(protID, "/Users/elaine/Library/CloudStorage/OneDrive-JohnsHopkins/CLUMP-master/structures/" + protID + ".pdb")
+                        continue             
                 structure = self.pbds[protID]
                 # get the coordinates for the mutation
                 #print(protID, pos)
                	coord = np.array(structure[pos]['CA'].get_coord())
-           
-
-                ########
-                
-
                 if self.normalize:
                     plen = self.Proteinlen[protID]
                     pos=float(pos)/float(plen)
@@ -140,8 +133,6 @@ class Parser():
         return db,domain
 
     def __init__(self, inputfile,lengthfile,af,ncutoff,normalize,structdir):
-        
-
         self.Proteinlen = self.FillLen(lengthfile)
         self.normalize=normalize
         self.NMUTCUTOFF=ncutoff
@@ -299,9 +290,7 @@ class Parser():
         pdbparser = PDBParser()
         clumppermutations=dict()
         for key in db:
-            #print(key)
             protID = key
-            #structure = pdbparser.get_structure(protID, "/Users/elaine/Library/CloudStorage/OneDrive-JohnsHopkins/CLUMP-master/structures/" + protID + ".pdb")
             structure = self.pbds[protID]
 
             if db[key]>=int(self.NMUTCUTOFF):##this was added to correct when controls have less than ncutoffs
@@ -319,15 +308,12 @@ class Parser():
                             perm_coords = np.vstack((perm_coords, [list(structure[int(pos)]['CA'].get_coord())]))
            
                     
-                        #permsample = perm_coords 
                         permmedoids=self.pamk(perm_coords)
 
-                        #permsample = [coords[i:i+3] for i in np.arange(0, len(coords), 3)]
                         distances=[]
                         for perm in perm_coords:
                             dist = math.log(min(np.sqrt(np.sum((permmedoids - perm)**2, axis = 1))) + 1)
-                            #dist =  math.log(min([np.sqrt(np.sum((perm-x)**2)) for x in permmedoids]) + 1)
-                            #dist = math.log( min( [abs(perm - x) for x in permmedoids] ) + 1)
+                           
                             distances.append(dist)
                         clump = float(sum(distances)) / float(len(permsample))
                         clumppermutations[key].append(clump)
@@ -340,11 +326,9 @@ class Parser():
         '''Perform permutation testing to get a pvalue'''
 
         controldb,controldomains=self.fill(controlfile,afcutoff)
-        #print(controldb)
         controlname=list(controldb.keys())[0][2]
         controlvalues=self.controlclump(controldb)
         controldb=self.permparse(controlfile,afcutoff)
-        #print(controldb)
         casedb=self.permparse(casefile,afcutoff)
         controlpermutations=self.permutedb(controldb,numberofperm)
         casepermutations=self.permutedb(casedb,numberofperm)
@@ -358,8 +342,7 @@ class Parser():
                 cases=np.array(casepermutations[protID])
                 controlrecord=(record[0],record[1],controlname)
                 overallresults=controlvalues[controlrecord]-self.clumps[record]
-                #print(controlpermutations)
-                #print(casepermutations)
+  
                 diffdist=controls-cases
                 pgreater=float(len(diffdist[diffdist<overallresults]))/float(len(diffdist))
                 pless=float(len(diffdist[diffdist>overallresults]))/float(len(diffdist))
