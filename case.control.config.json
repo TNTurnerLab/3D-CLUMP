@@ -1,8 +1,8 @@
 {
-  "protein_file": "/mnt/disk005/data/projects/GRUMP/CLUMP-master/inputs/GI_GW_proteins_to_test.txt",
-  "mutation_file": "/mnt/disk005/data/projects/GRUMP/CLUMP-master/inputs/GI_GW.input.txt",
-  "control_file": "/mnt/disk005/data/projects/GRUMP/CLUMP-master/inputs/kaplanis+turnerdenovo.inputfile.txt",
+  "protein_file": "/path/to/proteins_to_test.txt",
+  "mutation_file": "/path/to/mutation.input.txt",
+  "control_file": "/path/to/control.input.txt",
   "permutations": "1000",
-  "protein_length": "/mnt/disk005/data/projects/GRUMP/CLUMP-master/protein.2.length.txt", 
-  "structures_directory": "/mnt/disk005/data/projects/GRUMP/CLUMP-master/ranked_0_pdb_files/"
+  "protein_length": "/path/to/protein.2.length.2023.txt", 
+  "structures_directory": "/path/to/pdb/files/"
 }
