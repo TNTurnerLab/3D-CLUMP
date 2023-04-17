@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 '''
 Code modified by Yilin Chen
-Rachel Kruzan, PhD,
+Rachel Karchin, Ph.D., Lab
 Johns Hopkins University
 
 and
 
 Jeffrey K. Ng
-Tychele N. Turner, PhD, 
+Tychele N. Turner, Ph.D., Lab
 Washington University in St. Louis 
 
 Initial Commit date: 2/13/23
