@@ -3,6 +3,13 @@
 
 3D-CLUMP (3D-CLustering by Mutation Postion) is an unsupervised clustering of amino acid residue positions where variants occur, without any prior knowledge of their functional importance, in 3D space.  This code is based on the [original CLUMP](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6354780/).
 
+This is a program developed collaboratively by the laboratories of Dr. Tychele N. Turner, Washington Unviersity St. Louis,  and Dr. Rachel Karchin Johns Hopkins University.
+
+Current Maintainers:
+Jeffrey Ng, Dr. Turner Lab, jeffrey.ng@wustl.edu
+
+Yilin Chen, Dr. Karchin Lab, ychen338@jhu.edu
+
 ## Citation
 If you use 3D-CLUMP in your research, please cite:
 ** Our paper, hopefully! **
@@ -18,7 +25,7 @@ Or by building the env.yaml file found in the dockerfile folder.
 ## USAGE:
 
 ```
-python combined.clump.3d2.py -f inputfile -p protein_lengths -s structurepath
+python 3D-CLUMP.py -f inputfile -p protein_lengths -s structurepath
 ```
 OPTIONS:
 -a allele_frequency(Default=1)
@@ -65,7 +72,7 @@ You can find an updated protein length file: protein.2.length.2023.txt
 
 #### Python docker run:
 ```
-docker run  -v "/path/to/github_repo:/runme" -v "/path/to/pdb/files:/proteins" jng2/testme:clump3d_slim_env  /opt/conda/envs/snakemake/bin/python3 /runme/combined.clump.3d2.py -s /proteins/ -f /runme/mutation_input -p /runme/protein.2.length.2023.txt -c /runme/control_input -m 5 -z 1000 
+docker run  -v "/path/to/github_repo:/runme" -v "/path/to/pdb/files:/proteins" jng2/testme:clump3d_slim_env  /opt/conda/envs/snakemake/bin/python3 /runme/3D-CLUMP.py -s /proteins/ -f /runme/mutation_input -p /runme/protein.2.length.2023.txt -c /runme/control_input -m 5 -z 1000 
 ```
 
 Output:
