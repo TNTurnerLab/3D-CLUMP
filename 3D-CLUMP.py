@@ -30,7 +30,7 @@ r.library('fpc')
 rpy2.robjects.numpy2ri.activate()
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 class CmdOpts(object):
-    usage="""%prog [options] -f -p
+    usage="""%prog [options] -f -p -s
 
 
     """
