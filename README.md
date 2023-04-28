@@ -61,21 +61,31 @@ The protein length file is in the format:
 
 You can find an updated protein length file: protein.2.length.2023.txt
 
+## Example runs
 
+#### Python docker run:
+```
+docker run  -v "/path/to/github_repo:/runme" -v "/path/to/pdb/files:/proteins" jng2/testme:clump3d_slim_env  /opt/conda/envs/snakemake/bin/python3 /runme/combined.clump.3d2.py -s /proteins/ -f /runme/mutation_input -p /runme/protein.2.length.2023.txt -c /runme/control_input -m 5 -z 1000 
+```
+
+Output:
+```
+SMARCA2	NP_001276325	ndd_out	2.7132983495149348	1.0	0.0	0.8383716972664214	3.5516700467813562
+```
 
 Running high throughput CLUMP using snakemake:
  
 
-Case-Control CLUMP
+#### Snakemake CLUMP
 
 Local
 
 ```
-snakemake -s case.control.snake
+snakemake -s case.control.snake --cores 2
 ```
 
 Submit to cluster
 
 ```
-snakemake --cluster 'qsub {params.sge_opts}' -j 100 -w 30 -k -s case.control.snake
+snakemake --cluster 'your cluster information' -j 100 -w 30 -k -s case.control.snake
 ```
