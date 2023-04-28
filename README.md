@@ -10,7 +10,7 @@ If you use 3D-CLUMP in your research, please cite:
 
 ## 3D-CLUMP Docker image can be found here:
 ```
-docker pull jng2/testme:clump3
+docker pull jng2/testme:clump3d_slim_env
 ```
 Or by building the env.yaml file found in the dockerfile folder.
 
