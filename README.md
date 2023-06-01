@@ -70,9 +70,11 @@ You can find an updated protein length file: protein.2.length.2023.txt
 
 ## Example runs
 
+When running, please make ensure that ```/opt/conda/envs/snakemake/bin``` is in the PATH.  It is set by default, but if your cluster overwrites the Docker image envionment pathways, this will need to be either added to the path or by activiating the ```snakemake``` conda envionment.  
+
 #### Python docker run:
 ```
-docker run  -v "/path/to/github_repo:/runme" -v "/path/to/pdb/files:/proteins" jng2/testme:clump3d_slim_env  /opt/conda/envs/snakemake/bin/python3 /runme/3D-CLUMP.py -s /proteins/ -f /runme/mutation_input -p /runme/protein.2.length.2023.txt -c /runme/control_input -m 5 -z 1000 
+docker run  -v "/path/to/github_repo:/runme" -v "/path/to/pdb/files:/proteins" jng2/testme:clump3d_slim_env  python3 /runme/3D-CLUMP.py -s /proteins/ -f /runme/mutation_input -p /runme/protein.2.length.2023.txt -c /runme/control_input -m 5 -z 1000 
 ```
 
 Output:
