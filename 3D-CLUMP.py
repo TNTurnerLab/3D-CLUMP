@@ -219,9 +219,8 @@ class Parser():
                 pamobject = pamobject[0]  # mediod as r matrix
                 medoids = np.array(pamobject[0])
             return medoids
-        except:
-            raise
-            return None
+        except TypeError:
+            return -1
 
 
     def clump(self):
@@ -289,6 +288,7 @@ class Parser():
         '''do permutations'''
         pdbparser = PDBParser()
         clumppermutations=dict()
+        count_errors=0
         for key in db:
             protID = key
             structure = self.pbds[protID]
@@ -317,10 +317,14 @@ class Parser():
                             distances.append(dist)
                         clump = float(sum(distances)) / float(len(permsample))
                         clumppermutations[key].append(clump)
-                    except KeyError:
+                    except np.AxisError:
                         # print("keyerror", ii)
+                        count_errors+=1
                         pass
-        return clumppermutations
+        return clumppermutations,count_errors
+    def removeFailed(self,holdme,errorsize):
+        #print(errorsize)
+        return np.random.choice(holdme,size=errorsize,replace=False)
 
     def performpermutations(self,casefile,controlfile,numberofperm,afcutoff):
         '''Perform permutation testing to get a pvalue'''
@@ -330,9 +334,12 @@ class Parser():
         controlvalues=self.controlclump(controldb)
         controldb=self.permparse(controlfile,afcutoff)
         casedb=self.permparse(casefile,afcutoff)
-        controlpermutations=self.permutedb(controldb,numberofperm)
-        casepermutations=self.permutedb(casedb,numberofperm)
-        
+        controlpermutations,control_fail=self.permutedb(controldb,numberofperm)
+        casepermutations,case_fail=self.permutedb(casedb,numberofperm)
+        if control_fail!=0:
+            print('Number of permutations failed when calcuating controls: '+str(control_fail))
+        if case_fail!=0:
+            print('Number of permutations failed when calcuating case: '+str(case_fail))
         for record in self.clumps:
             
             protID=record[1]
@@ -340,6 +347,13 @@ class Parser():
             try:####added when controlpermutations[protID] gives keyerror
                 controls=np.array(controlpermutations[protID])
                 cases=np.array(casepermutations[protID])
+                
+                if case_fail!=0 or control_fail!=0: 
+                    print(np.size(controls),np.size(cases))
+                    if control_fail<case_fail:
+                        controls=self.removeFailed(controls,np.size(cases))
+                    elif control_fail>case_fail:
+                        cases=self.removeFailed(cases,np.size(controls))
                 controlrecord=(record[0],record[1],controlname)
                 overallresults=controlvalues[controlrecord]-self.clumps[record]
   
