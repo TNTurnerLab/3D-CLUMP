@@ -1,14 +1,14 @@
 # 3D-CLUMP
 
 
-3D-CLUMP (3D-CLustering by Mutation Postion) is an unsupervised clustering of amino acid residue positions where variants occur, without any prior knowledge of their functional importance, in 3D space.  This code is based on the [original CLUMP](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6354780/).
+3D-CLUMP (3D-CLustering by Mutation Position) is an unsupervised clustering of amino acid residue positions where variants occur, without any prior knowledge of their functional importance, in 3D space.  This code is based on the [original CLUMP](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6354780/).
 
-This is a program developed collaboratively by the laboratories of Dr. Tychele N. Turner, Washington Unviersity St. Louis,  and Dr. Rachel Karchin Johns Hopkins University.
+This is a program developed collaboratively by the laboratories of Dr. Tychele N. Turner at Washington University in St. Louis [http://turnerlab.wustl.edu/](http://turnerlab.wustl.edu/) and Dr. Rachel Karchin at Johns Hopkins University [https://karchinlab.org/](https://karchinlab.org/).
 
 Current Maintainers:
 Jeffrey Ng, Dr. Turner Lab, jeffrey.ng@wustl.edu
 
-Yilin Chen, Dr. Karchin Lab, ychen338@jhu.edu
+Yilin Chen, Dr. Karchin Lab, yilinc5@stanford.edu
 
 ## Citation
 If you use 3D-CLUMP in your research, please cite:
@@ -44,6 +44,7 @@ OPTIONS:
 
 -n normalize(Default=No)
    Do you want to normalize based on protein length. Normalization was not used in the published results.
+   
 -t Output Column Titles
 
 
@@ -70,7 +71,7 @@ You can find an updated protein length file: protein.2.length.2023.txt
 
 ## Example runs
 
-When running, please make ensure that ```/opt/conda/envs/snakemake/bin``` is in the PATH.  It is set by default, but if your cluster overwrites the Docker image envionment pathways, this will need to be either added to the path or by activiating the ```snakemake``` conda envionment.  
+When running, please make ensure that ```/opt/conda/envs/snakemake/bin``` is in the PATH.  It is set by default, but if your cluster overwrites the Docker image environment pathways, this will need to be either added to the path or by activating the ```snakemake``` conda environment.  
 
 #### Python docker run:
 ```
