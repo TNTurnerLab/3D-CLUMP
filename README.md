@@ -2,7 +2,7 @@
 
 ![3D-CLUMP](logo/3D-CLUMP-NEW-LOGO.png "3D-CLUMP")
 
-3D-CLUMP (3D-CLustering by Mutation Position) is an unsupervised clustering of amino acid residue positions where variants occur, without any prior knowledge of their functional importance, in 3D space.  This code is based on the [original CLUMP](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6354780/).
+3D-CLUMP (3D-CLUstering by Mutation Position) is an unsupervised clustering of amino acid residue positions where variants occur, without any prior knowledge of their functional importance, in 3D space.  This code is based on the [original CLUMP](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6354780/).
 
 This is a program developed collaboratively by the laboratories of Dr. Tychele N. Turner at Washington University in St. Louis [http://turnerlab.wustl.edu/](http://turnerlab.wustl.edu/) and Dr. Rachel Karchin at Johns Hopkins University [https://karchinlab.org/](https://karchinlab.org/).
 
