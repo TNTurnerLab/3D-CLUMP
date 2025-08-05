@@ -11,7 +11,7 @@ Jeffrey Ng, Dr. Turner Lab, jeffrey.ng@wustl.edu
 
 Yilin Chen, Dr. Karchin Lab, yilinc5@stanford.edu
 
-Please check out our preprint on medRxiv: https://www.medrxiv.org/content/10.1101/2024.02.02.24302238v1 and watch for our future publication.
+Please check out our publication: https://www.cell.com/cell-genomics/fulltext/S2666-979X(25)00063-1
 
 ## 3D-CLUMP Docker image can be found here:
 ```
